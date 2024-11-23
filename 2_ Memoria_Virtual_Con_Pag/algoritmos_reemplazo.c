@@ -1,4 +1,4 @@
-#include "tabla_hash.c"
+#include "header.h"
 
 void OPTM(int size, int *lista, int largo) {
   hashTable tabla = newHashTable(size);
@@ -135,7 +135,6 @@ void LRU(int size, int *lista, int largo) {
 }
 
 
-// TA MAL; FUE UNA IDEA NOMA EL LRU_SR (Simple Reloj)
 void LRU_RS(int size, int *lista, int largo) {
   
   hashTable tabla = newHashTable(size);
@@ -150,6 +149,31 @@ void LRU_RS(int size, int *lista, int largo) {
     if(searchItem(tabla, lista[i])) {
       printf("HIT: [%d]", lista[i]);
       getItem(tabla, lista[i])->value = 1;
+      
+      for(int j=0;j<size;j++){
+	if(lista[i] == queue[j]){
+	  position = j;
+	  break;
+	}
+      }
+      
+      if(position == index){
+	index = (index + 1) % size;
+        
+      } else {
+	
+	victim = currItem;
+	for(int k = 0; k<size; k++){
+	  if((position+k)%size != (index+size-1)%size){
+	    queue[(position+k)%size] = queue[(position+k+1)%size];
+	  }else{
+	    queue[(index+size-1)%size] = lista[i];
+	    position = (index+size-1)%size;
+	    break;
+	  }
+	}
+        
+      }
     } else {
       printf("MISS: [%d]", lista[i]);
       missCount++;
@@ -219,7 +243,3 @@ void LRU_RS(int size, int *lista, int largo) {
   deleteHash(tabla);
 }
 
-int main(int argc, char *argv[]) {
-    int lista[] = {0, 1, 2, 0, 1, 3, 0, 3, 1, 2, 1};
-    LRU_RS(3, lista, 11);
-}

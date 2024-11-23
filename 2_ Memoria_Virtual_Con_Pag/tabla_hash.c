@@ -1,18 +1,16 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
+#include "header.h"
 
-typedef struct item {
-    int key;
-    int value;
-    struct item *next;
-} item;
+/* typedef struct item { */
+/*     int key; */
+/*     int value; */
+/*     struct item *next; */
+/* } item; */
 
-typedef struct hashTable {
-    int buckets;
-    int count;
-    item **table;
-} hashTable;
+/* typedef struct hashTable { */
+/*     int buckets; */
+/*     int count; */
+/*     item **table; */
+/* } hashTable; */
 
 hashTable newHashTable(int size) {
     hashTable newHash;
