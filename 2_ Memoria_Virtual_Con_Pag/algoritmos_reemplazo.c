@@ -65,29 +65,26 @@ void FIFO(int size, int *lista, int largo) {
     int index = 0;
     for(int i=0; i<largo; i++) {
         if(searchItem(tabla, lista[i]))
-            printf("HIT: [%d]", lista[i]);
+            printf("\n[%d]: HIT", lista[i]);
         else {
-            printf("MISS: [%d]", lista[i]);
+            printf("\n[%d]: MISS", lista[i]);
             missCount++;
             if(insertItem(tabla, lista[i], 0)) {
                 tabla.count++;
                 queue[index] = lista[i];
-                index++;
+                index = (index+1)%size;
             } else {
-                printf("\nVICTIM: [%d]", queue[0]);
-                deleteItem(tabla, queue[0]);
+                printf(" -> VICTIM: [%d]", queue[index]);
+                deleteItem(tabla, queue[index]);
                 tabla.count--;
-                for(int i=0; i<index-1; i++)
-                    queue[i] = queue[i+1];
-                queue[index-1] = lista[i];
+                queue[index] = lista[i];+
                 insertItem(tabla, lista[i], 0);
                 tabla.count++;
+                index = (index+1)%size;
             }
         }
-        printf("\n");
-        displayHash(tabla);
     }
-    printf("Total Miss: %d\n", missCount);
+    printf("\n\nN%cmero de fallos: %d\n\n", 163, missCount);
     deleteHash(tabla);
 }
 
@@ -98,10 +95,10 @@ void LRU(int size, int *lista, int largo) {
     item *currItem;
     for(int i=0; i<largo; i++) {
         if(searchItem(tabla, lista[i])) {
-            printf("HIT: [%d]", lista[i]);
+            printf("\n[%d]: HIT", lista[i]);
             getItem(tabla, lista[i])->value = position;
         } else {
-            printf("MISS: [%d]", lista[i]);
+            printf("\n[%d]: MISS", lista[i]);
             missCount++;
             if(insertItem(tabla, lista[i], position)) {
                 tabla.count++;
@@ -119,7 +116,7 @@ void LRU(int size, int *lista, int largo) {
                         }
                     }
                 }
-                printf("\nVICTIM: [%d]", victim->key);
+                printf(" -> VICTIM: [%d]", victim->key);
                 deleteItem(tabla, victim->key);
                 tabla.count--;
                 insertItem(tabla, lista[i], position);
@@ -127,8 +124,6 @@ void LRU(int size, int *lista, int largo) {
             }
         }
         position++;
-        printf("\n");
-        displayHash(tabla);
     }
     printf("Total Miss: %d\n", missCount);
     deleteHash(tabla);
@@ -149,30 +144,25 @@ void LRU_RS(int size, int *lista, int largo) {
     if(searchItem(tabla, lista[i])) {
       printf("HIT: [%d]", lista[i]);
       getItem(tabla, lista[i])->value = 1;
-      
       for(int j=0;j<size;j++){
-	if(lista[i] == queue[j]){
-	  position = j;
-	  break;
-	}
+        if(lista[i] == queue[j]){
+          position = j;
+          break;
+        }
       }
-      
-      if(position == index){
-	index = (index + 1) % size;
-        
+      if(position == index) {
+        index = (index + 1) % size; 
       } else {
-	
-	victim = currItem;
-	for(int k = 0; k<size; k++){
-	  if((position+k)%size != (index+size-1)%size){
-	    queue[(position+k)%size] = queue[(position+k+1)%size];
-	  }else{
-	    queue[(index+size-1)%size] = lista[i];
-	    position = (index+size-1)%size;
-	    break;
-	  }
-	}
-        
+        victim = currItem;
+        for(int k = 0; k<size; k++){
+          if((position+k)%size != (index+size-1)%size){
+            queue[(position+k)%size] = queue[(position+k+1)%size];
+          }else{
+            queue[(index+size-1)%size] = lista[i];
+            position = (index+size-1)%size;
+            break;
+          }
+        }       
       }
     } else {
       printf("MISS: [%d]", lista[i]);
