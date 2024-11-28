@@ -35,12 +35,12 @@ int displayHash(hashTable hash);
 
 int deleteHash(hashTable hash);
 
-void OPTM(int size, int *lista, int largo);
+void OPTM(int size, int *lista, int largo, int mostrar);
 
-void FIFO(int size, int *lista, int largo);
+void FIFO(int size, int *lista, int largo, int mostrar);
 
-void LRU(int size, int *lista, int largo);
+void LRU(int size, int *lista, int largo, int mostrar);
 
-void LRU_RS(int size, int *lista, int largo);
+void LRU_RS(int size, int *lista, int largo, int mostrar);
 
 #endif
