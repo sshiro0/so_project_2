@@ -144,12 +144,7 @@ void LRU_RS(int size, int *lista, int largo) {
     if(searchItem(tabla, lista[i])) {
       printf("HIT: [%d]", lista[i]);
       getItem(tabla, lista[i])->value = 1;
-      for(int j=0;j<size;j++){
-        if(lista[i] == queue[j]){
-          position = j;
-          break;
-        }
-      }
+      
       if(position == index) {
         index = (index + 1) % size; 
       } else {
