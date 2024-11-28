@@ -14,6 +14,10 @@ int main(int argc, char *argv[]){
 	  if(strcmp(argv[5],"-f") == 0){
 	    int largo;
 	    int *lista = readReferences(argv[6],&largo);
+	    if(lista == NULL){
+	      printf("Archivo no valido");
+	      return 1;
+	    }
 	    if(argc == 8){
 	      if(strcmp(argv[7],"-s") == 0){
 		show = 1;

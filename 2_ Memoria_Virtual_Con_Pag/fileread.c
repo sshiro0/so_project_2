@@ -15,7 +15,7 @@ int* readReferences(char *filename, int *size){
   }
 
   if(num_count == 0){
-    printf("No references found in file.\n");
+    printf("No hay referencias en archivo\n");
     fclose(f);
     return NULL;
   }
