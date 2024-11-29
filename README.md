@@ -42,6 +42,12 @@ Para ejecutar el código, se debe ejecutar una línea de comando con la siguient
 
 Los marcos iniciales corresponden a un número entero positivo.
 
+Opcionalmente, puede ejecutar el código con la siguiente estructura para mostar el funcionamiento de los algoritmos de reemplazo.
+
+```
+./mvirtual -m <marcos_iniciales> -a <algoritmo_reemplazo> -f <file_referencias> -s
+```
+
 Los algoritmos de reemplazo son: OPTIMO, FIFO, LRU y LRU_RELOJ.
 
 El archivo con las referencias (file_referencias) contiene una línea con los números de las referencias separados por espacios. 
