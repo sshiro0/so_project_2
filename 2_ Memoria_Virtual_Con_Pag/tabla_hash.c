@@ -103,7 +103,7 @@ item* getItem(hashTable hash, int key) {
 int displayHash(hashTable hash) {
     item *currItem;
     for(int i=0; i<hash.buckets; i++) {
-        printf("%d: ", i);
+        printf("\n%d: ", i);
         if(hash.table[i] == NULL) {
             printf("-");
         } else {
@@ -115,7 +115,6 @@ int displayHash(hashTable hash) {
                 currItem = currItem->next;
             }
         }
-        printf("\n");
     }
     printf("\n");
 }
