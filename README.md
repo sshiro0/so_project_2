@@ -42,7 +42,7 @@ Para ejecutar el código, se debe ejecutar una línea de comando con la siguient
 
 Los marcos iniciales corresponden a un número entero positivo.
 
-Los algoritmos de reemplazo son; OPTIMO, FIFO, LRU y LRU_RELOJ.
+Los algoritmos de reemplazo son: OPTIMO, FIFO, LRU y LRU_RELOJ.
 
 El archivo con las referencias (file_referencias) contiene una línea con los números de las referencias separados por espacios. 
 
